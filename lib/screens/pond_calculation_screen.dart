@@ -13,7 +13,7 @@ class PondCalculationsScreen extends StatelessWidget {
         title: Text('Pond Calculations'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(5),
+        padding: const EdgeInsets.all(10),
         child: ListView(
           children: [
             PondCalculationCard(

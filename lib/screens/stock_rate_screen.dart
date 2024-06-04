@@ -118,6 +118,9 @@ class _StockRateScreenState extends State<StockRateScreen> {
                   });
                 },
               ),
+              SizedBox(
+                height: 10,
+              ),
               DropdownButtonFormField<String>(
                 value: _selectedUnit,
                 decoration: InputDecoration(labelText: 'Measurement Unit'),
@@ -130,21 +133,6 @@ class _StockRateScreenState extends State<StockRateScreen> {
                 onChanged: (value) {
                   setState(() {
                     _selectedUnit = value!;
-                  });
-                },
-              ),
-              DropdownButtonFormField<String>(
-                value: _selectedFishType,
-                decoration: InputDecoration(labelText: 'Type of Fish'),
-                items: ['Tilapia', 'Catfish', 'Carp']
-                    .map((fishType) => DropdownMenuItem(
-                          value: fishType,
-                          child: Text(fishType),
-                        ))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedFishType = value!;
                   });
                 },
               ),
@@ -161,6 +149,9 @@ class _StockRateScreenState extends State<StockRateScreen> {
                     return null;
                   },
                 ),
+              SizedBox(
+                height: 10,
+              ),
               if (_selectedPondType == 'Square/Rectangle')
                 TextFormField(
                   controller: _lengthController,
@@ -173,6 +164,9 @@ class _StockRateScreenState extends State<StockRateScreen> {
                     return null;
                   },
                 ),
+              SizedBox(
+                height: 10,
+              ),
               if (_selectedPondType == 'Square/Rectangle')
                 TextFormField(
                   controller: _widthController,
@@ -185,6 +179,9 @@ class _StockRateScreenState extends State<StockRateScreen> {
                     return null;
                   },
                 ),
+              SizedBox(
+                height: 10,
+              ),
               TextFormField(
                 controller: _depthController,
                 decoration: InputDecoration(labelText: 'Water Depth'),
@@ -196,6 +193,25 @@ class _StockRateScreenState extends State<StockRateScreen> {
                   return null;
                 },
               ),
+              SizedBox(
+                height: 10,
+              ),
+              DropdownButtonFormField<String>(
+                value: _selectedFishType,
+                decoration: InputDecoration(labelText: 'Type of Fish'),
+                items: ['Tilapia', 'Catfish', 'Carp']
+                    .map((fishType) => DropdownMenuItem(
+                          value: fishType,
+                          child: Text(fishType),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedFishType = value!;
+                  });
+                },
+              ),
+
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _calculateStockRate,
