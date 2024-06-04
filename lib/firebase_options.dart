@@ -33,10 +33,7 @@ class DefaultFirebaseOptions {
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -66,4 +63,15 @@ class DefaultFirebaseOptions {
     iosClientId: '356437037363-h33kfn7ntfkkl5qm646uqctoqpddpbkl.apps.googleusercontent.com',
     iosBundleId: 'com.example.jakdamFarmManager',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBbR0UgxqUWyngJr643zNePXWmXnkVEUig',
+    appId: '1:356437037363:web:1fd296f43e725e28ddee46',
+    messagingSenderId: '356437037363',
+    projectId: 'jakdam-farm-manager',
+    authDomain: 'jakdam-farm-manager.firebaseapp.com',
+    storageBucket: 'jakdam-farm-manager.appspot.com',
+    measurementId: 'G-ZVPJ8P92K8',
+  );
+
 }

@@ -116,9 +116,7 @@ class _AuthCardState extends State<AuthCard>
     } catch (error) {
       // Handle authentication errors (e.g., display error message)
     } finally {
-      // if (_isLoading) {
-      //   Navigator.of(context).pop(); // Close the dialog
-      // }
+  
       setState(() {
         _isLoading = false;
       });
@@ -163,6 +161,9 @@ class _AuthCardState extends State<AuthCard>
                         _authData['email'] = value!;
                       },
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     TextFormField(
                       enabled: _authMode == AuthMode.Login ||
                           _authMode == AuthMode.Signup,
@@ -185,6 +186,9 @@ class _AuthCardState extends State<AuthCard>
                       onSaved: (value) {
                         _authData['password'] = value!;
                       },
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     AnimatedSize(
                       duration: Duration(milliseconds: 300),
@@ -216,6 +220,9 @@ class _AuthCardState extends State<AuthCard>
                                   onSaved: (value) {
                                     _authData['confirmPassword'] = value!;
                                   },
+                                ),
+                                SizedBox(
+                                  height: 10,
                                 ),
                                 TextFormField(
                                   decoration:
