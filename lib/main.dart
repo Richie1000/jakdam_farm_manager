@@ -37,11 +37,7 @@ class MyApp extends StatelessWidget {
             }
           },
         ),
-        // routes: {
-        //   //'/': (BuildContext context) => HomePage(),
-        //   //AuthScreen.routeName: (BuildContext context) => AuthScreen(),
-        //   StocksScreen.routeName: (BuildContext context) => StocksScreen()
-        // },
+        
       ),
     );
   }

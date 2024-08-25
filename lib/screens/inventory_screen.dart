@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../models/inventory_item.dart';
 import '../providers/inventory_provider.dart';
 import 'add_item_screen.dart';
@@ -10,12 +9,35 @@ class InventoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Inventory')),
+      appBar: AppBar(
+        title: Text('Inventory'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: InventorySearch(
+                  Provider.of<InventoryProvider>(context, listen: false).items,
+                ),
+              );
+            },
+          ),
+        ],
+      ),
       body: Consumer<InventoryProvider>(
         builder: (context, provider, _) {
-          return provider.items.isEmpty
-              ? Center(child: Text('No items'))
-              : SingleChildScrollView(
+          return StreamBuilder<List<InventoryItem>>(
+            stream: provider.itemsStream,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return Center(child: Text('No items'));
+              } else {
+                return SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -26,36 +48,33 @@ class InventoryScreen extends StatelessWidget {
                         DataColumn(label: Text('Date Added')),
                         DataColumn(label: Text('Actions')),
                       ],
-                      rows: provider.items.map((item) {
+                      rows: snapshot.data!.map((item) {
                         return DataRow(cells: [
                           DataCell(Text(item.name)),
                           DataCell(Text(item.quantity.toString())),
-                          DataCell(Text(item.dateAdded
-                              .toIso8601String()
-                              .substring(0, 10)
-                              .split('-')
-                              .reversed
-                              .join('/'))),
+                          DataCell(Text(
+                              '${item.dateAdded.year}-${item.dateAdded.month.toString().padLeft(2, '0')}-${item.dateAdded.day.toString().padLeft(2, '0')}')),
                           DataCell(Row(
                             children: [
                               IconButton(
                                 icon: Icon(Icons.add),
                                 onPressed: () {
-                                  provider.updateItemQuantity(
-                                      item.id, item.quantity + 1);
+                                  Provider.of<InventoryProvider>(context, listen: false)
+                                      .updateItemQuantity(item.id, item.quantity + 1);
                                 },
                               ),
                               IconButton(
                                 icon: Icon(Icons.remove),
                                 onPressed: () {
-                                  provider.updateItemQuantity(
-                                      item.id, item.quantity - 1);
+                                  Provider.of<InventoryProvider>(context, listen: false)
+                                      .updateItemQuantity(item.id, item.quantity - 1);
                                 },
                               ),
                               IconButton(
                                 icon: Icon(Icons.delete),
                                 onPressed: () {
-                                  provider.deleteItem(item.id);
+                                  Provider.of<InventoryProvider>(context, listen: false)
+                                      .deleteItem(item.id);
                                 },
                               ),
                             ],
@@ -65,32 +84,17 @@ class InventoryScreen extends StatelessWidget {
                     ),
                   ),
                 );
+              }
+            },
+          );
         },
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            heroTag: "btn1",
-            child: Icon(Icons.search),
-            onPressed: () {
-              showSearch(
-                  context: context,
-                  delegate: InventorySearch(
-                      Provider.of<InventoryProvider>(context, listen: false)
-                          .items));
-            },
-          ),
-          SizedBox(height: 10),
-          FloatingActionButton(
-            heroTag: "btn2",
-            child: Icon(Icons.add),
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => AddItemScreen()));
-            },
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => AddItemScreen()));
+        },
       ),
     );
   }

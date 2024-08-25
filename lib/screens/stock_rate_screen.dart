@@ -7,76 +7,45 @@ class StockRateScreen extends StatefulWidget {
 
 class _StockRateScreenState extends State<StockRateScreen> {
   final _formKey = GlobalKey<FormState>();
-  String _selectedPondType = 'Circular';
+  String _selectedPondType = 'Rectangular';
   String _selectedUnit = 'Meters';
-  String _selectedFishType = 'Tilapia';
-  final TextEditingController _diameterController = TextEditingController();
   final TextEditingController _lengthController = TextEditingController();
   final TextEditingController _widthController = TextEditingController();
   final TextEditingController _depthController = TextEditingController();
+  final TextEditingController _diameterController = TextEditingController();
 
-  // Function to convert volume based on selected measurement unit
-  double _convertVolume(double volume) {
-    if (_selectedUnit == 'Feet') {
-      // Convert from cubic feet to liters
-      return volume * 28.317;
-    }
-    // Default to cubic meters
-    return volume * 1000; // Convert from cubic meters to liters
+  double _convertToFeet(double value) {
+    return value * 3.28084; // Conversion factor from meters to feet
   }
 
-  void _calculateStockRate() {
+  void _calculateWaterVolume() {
     if (_formKey.currentState!.validate()) {
+      double length = double.parse(_lengthController.text);
+      double width = double.parse(_widthController.text);
       double depth = double.parse(_depthController.text);
-      double volume;
 
-      if (_selectedPondType == 'Circular') {
-        double diameter = double.parse(_diameterController.text);
-        double radius = diameter / 2;
-        volume = 3.14159 * radius * radius * depth; // Volume of a cylinder
-      } else {
-        double length = double.parse(_lengthController.text);
-        double width = double.parse(_widthController.text);
-        volume = length * width * depth; // Volume of a rectangular prism
+      // Convert values to feet if 'Meters' is selected
+      if (_selectedUnit == 'Meters') {
+        length = _convertToFeet(length);
+        width = _convertToFeet(width);
+        depth = _convertToFeet(depth);
       }
 
-      // Convert volume based on selected measurement unit
-      double volumeInLiters = _convertVolume(volume);
+      // Calculate water volume in cubic feet
+      double volume = length * width * depth;
 
-      double stockingDensity;
-      double averageFishWeight;
+      // Convert cubic feet to liters
+      double volumeInLiters = volume * 28.32;
 
-      // Define stocking density and average fish weight based on selected fish type
-      switch (_selectedFishType) {
-        case 'Tilapia':
-          stockingDensity = 25.0; // kg/m³
-          averageFishWeight = 0.5; // kg per fish
-          break;
-        case 'Catfish':
-          stockingDensity = 50.0; // kg/m³
-          averageFishWeight = 1.0; // kg per fish
-          break;
-        case 'Carp':
-          stockingDensity = 20.0; // kg/m³
-          averageFishWeight = 0.75; // kg per fish
-          break;
-        default:
-          stockingDensity = 25.0;
-          averageFishWeight = 0.5;
-      }
-
-      double fishStockRate = volume * stockingDensity;
-      int numberOfFish = (fishStockRate / averageFishWeight).round();
+      // Final calculation and rounding off
+      int finalResult = (volumeInLiters / 13.15).round();
 
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Calculation Results'),
-            content: Text(
-              'Pond Water Volume: ${volumeInLiters.toStringAsFixed(2)} Liters\n'
-              'Fish Stock Rate: ${numberOfFish.toInt()} $_selectedFishType',
-            ),
+            title: Text('Stocking Capacity'),
+            content: Text('Your pond can conveniently hold $finalResult fishes to 1kg average weight.'),
             actions: [
               TextButton(
                 child: Text('OK'),
@@ -91,11 +60,72 @@ class _StockRateScreenState extends State<StockRateScreen> {
     }
   }
 
+  void _calculateWaterVolumeCircular() {
+    if (_formKey.currentState!.validate()) {
+      double diameter = double.parse(_diameterController.text);
+      double depth = double.parse(_depthController.text);
+
+      // Convert values to feet if 'Meters' is selected
+      if (_selectedUnit == 'Meters') {
+        diameter = _convertToFeet(diameter);
+        depth = _convertToFeet(depth);
+      }
+
+      // Calculate water volume for circular pond
+      double volume = 3.14159 * ((diameter * 0.5) * (diameter * 0.5)) * depth;
+      print(volume);
+
+      // Convert cubic feet to liters
+      double volumeInLiters = volume * 28.32;
+      print(volumeInLiters);
+
+      // Final calculation and rounding off
+      int finalResult = (volumeInLiters / 13.15).round();
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Stocking Capacity'),
+            content: Text('Your pond can conveniently hold $finalResult fishes to 1kg average weight.'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  void _calculation() {
+    if (_selectedPondType == "Circular") {
+      _calculateWaterVolumeCircular();
+    } else {
+      _calculateWaterVolume();
+    }
+  }
+
+  void _clearFields() {
+    _lengthController.clear();
+    _widthController.clear();
+    _depthController.clear();
+    _diameterController.clear();
+    setState(() {
+      _selectedPondType = 'Rectangular';
+      _selectedUnit = 'Meters';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stock Rate Calculation'),
+        title: Text('Water Volume Calculation'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -105,11 +135,11 @@ class _StockRateScreenState extends State<StockRateScreen> {
             children: [
               DropdownButtonFormField<String>(
                 value: _selectedPondType,
-                decoration: InputDecoration(labelText: 'Type of Pond'),
-                items: ['Circular', 'Square/Rectangle']
-                    .map((pondType) => DropdownMenuItem(
-                          value: pondType,
-                          child: Text(pondType),
+                decoration: InputDecoration(labelText: 'Pond Type'),
+                items: ['Rectangular', 'Circular']
+                    .map((type) => DropdownMenuItem(
+                          value: type,
+                          child: Text(type),
                         ))
                     .toList(),
                 onChanged: (value) {
@@ -118,6 +148,7 @@ class _StockRateScreenState extends State<StockRateScreen> {
                   });
                 },
               ),
+              SizedBox(height: 20),
               DropdownButtonFormField<String>(
                 value: _selectedUnit,
                 decoration: InputDecoration(labelText: 'Measurement Unit'),
@@ -133,35 +164,8 @@ class _StockRateScreenState extends State<StockRateScreen> {
                   });
                 },
               ),
-              DropdownButtonFormField<String>(
-                value: _selectedFishType,
-                decoration: InputDecoration(labelText: 'Type of Fish'),
-                items: ['Tilapia', 'Catfish', 'Carp']
-                    .map((fishType) => DropdownMenuItem(
-                          value: fishType,
-                          child: Text(fishType),
-                        ))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedFishType = value!;
-                  });
-                },
-              ),
-              SizedBox(height: 10), // Added space here
-              if (_selectedPondType == 'Circular')
-                TextFormField(
-                  controller: _diameterController,
-                  decoration: InputDecoration(labelText: 'Diameter'),
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter diameter';
-                    }
-                    return null;
-                  },
-                ),
-              if (_selectedPondType == 'Square/Rectangle')
+              SizedBox(height: 20),
+              if (_selectedPondType == 'Rectangular') ...[
                 TextFormField(
                   controller: _lengthController,
                   decoration: InputDecoration(labelText: 'Length'),
@@ -173,7 +177,7 @@ class _StockRateScreenState extends State<StockRateScreen> {
                     return null;
                   },
                 ),
-              if (_selectedPondType == 'Square/Rectangle')
+                SizedBox(height: 20),
                 TextFormField(
                   controller: _widthController,
                   decoration: InputDecoration(labelText: 'Width'),
@@ -185,21 +189,45 @@ class _StockRateScreenState extends State<StockRateScreen> {
                     return null;
                   },
                 ),
+              ] else ...[
+                TextFormField(
+                  controller: _diameterController,
+                  decoration: InputDecoration(labelText: 'Diameter'),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter diameter';
+                    }
+                    return null;
+                  },
+                ),
+              ],
+              SizedBox(height: 20),
               TextFormField(
                 controller: _depthController,
-                decoration: InputDecoration(labelText: 'Water Depth'),
+                decoration: InputDecoration(labelText: 'Fill Depth'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter water depth';
+                    return 'Please enter fill depth';
                   }
                   return null;
                 },
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _calculateStockRate,
-                child: Text('Calculate'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: _calculation,
+                    child: Text('Calculate'),
+                  ),
+                  ElevatedButton(
+                    onPressed: _clearFields,
+                    child: Text('Clear'),
+                    
+                  ),
+                ],
               ),
             ],
           ),

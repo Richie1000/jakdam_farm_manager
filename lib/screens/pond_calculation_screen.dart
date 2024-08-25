@@ -17,7 +17,7 @@ class PondCalculationsScreen extends StatelessWidget {
         child: ListView(
           children: [
             PondCalculationCard(
-              title: 'Pond Size Calculation',
+              title: 'Pond Stocking Capacity Calculation',
               onTap: () {
                 Navigator.push(
                   context,
@@ -25,36 +25,18 @@ class PondCalculationsScreen extends StatelessWidget {
                 );
               },
             ),
-            PondCalculationCard(
-              title: 'Treatment Dosage',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => TreatmentDosageScreen()),
-                );
-              },
-            ),
-            PondCalculationCard(
-              title: 'Production Budget',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ProductionBudgetScreen()),
-                );
-              },
-            ),
-            PondCalculationCard(
-              title: 'Auto Treatment Dosage',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AutoTreatmentDosageScreen()),
-                );
-              },
-            ),
+          
+          
+            // PondCalculationCard(
+            //   title: 'Auto Treatment Dosage',
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //           builder: (context) => AutoTreatmentDosageScreen()),
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

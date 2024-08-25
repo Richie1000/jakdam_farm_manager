@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../providers/auth.dart';
 import './feed_calculation_screen.dart';
@@ -13,17 +14,17 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fish Farm Management Dashboard'),
+        title: Text('Jakdam'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(5),
+        padding: const EdgeInsets.all(2),
         child: GridView.count(
           crossAxisCount: 2,
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 8.0,
+          //crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
           children: [
             DashboardCard(
-              title: 'Pond Calculations',
+              title: ' Pond  Calculations',
               lottieAsset: 'assets/animations/pond.json',
               onTap: () {
                 Navigator.push(
@@ -34,7 +35,7 @@ class DashboardScreen extends StatelessWidget {
               },
             ),
             DashboardCard(
-              title: 'Feed Calculations',
+              title: ' Feed  Calculations',
               lottieAsset: 'assets/animations/feed.json',
               onTap: () {
                 Navigator.push(
@@ -63,6 +64,16 @@ class DashboardScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => FeedFormulaeScreen()),
                 );
               },
+            ),
+            DashboardCard(
+              title: 'Request Training',
+              lottieAsset: 'assets/animations/training.json',
+              onTap: () async {
+              final Uri url = Uri.parse('https://jakdamfarmlife.com');
+              if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+                throw 'Could not launch $url';
+              }
+            },
             ),
             DashboardCard(
               title: 'Logout',
@@ -106,7 +117,7 @@ class DashboardCard extends StatelessWidget {
             SizedBox(height: 10),
             Text(
               title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
           ],
         ),

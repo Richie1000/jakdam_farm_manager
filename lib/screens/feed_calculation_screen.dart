@@ -16,7 +16,7 @@ class FeedCalculationScreen extends StatelessWidget {
         child: ListView(
           children: [
             CustomCard(
-              title: 'Daily Feed',
+              title: 'Daily Feed Intake',
               onTap: () {
                 Navigator.push(
                   context,

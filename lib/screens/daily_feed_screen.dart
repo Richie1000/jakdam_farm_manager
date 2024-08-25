@@ -1,155 +1,134 @@
 import 'package:flutter/material.dart';
 
 class DailyFeedScreen extends StatefulWidget {
+  const DailyFeedScreen({super.key});
+
   @override
-  _DailyFeedScreenState createState() => _DailyFeedScreenState();
+  State<DailyFeedScreen> createState() => _DailyFeedScreenState();
 }
 
 class _DailyFeedScreenState extends State<DailyFeedScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _quantityController = TextEditingController();
-  final _weightController = TextEditingController();
+  final TextEditingController _averageWeightController = TextEditingController();
+  final TextEditingController _fishQuantityController = TextEditingController();
 
-  double _dailyFeedRatio = 0;
-  String _feedSize = '';
-
-  void _calculateFeed() {
-    if (_formKey.currentState!.validate()) {
-      final int quantity = int.parse(_quantityController.text);
-      final double weight = double.parse(_weightController.text);
-
-      // Logic to calculate daily feed ratio and feed size
-      _dailyFeedRatio = _calculateDailyFeedRatio(quantity, weight);
-      _feedSize = _getFeedSize(weight);
-
-      setState(() {});
-    }
-  }
-
-  void _clearFields() {
-    _quantityController.clear();
-    _weightController.clear();
+  void _calculateDailyFeedIntake() {
     setState(() {
-      _dailyFeedRatio = 0;
-      _feedSize = '';
+      double averageWeight = double.tryParse(_averageWeightController.text) ?? 0.0;
+      int fishQuantity = int.tryParse(_fishQuantityController.text) ?? 0;
+
+      double dailyFeedIntake;
+      if (averageWeight <= 400) {
+        dailyFeedIntake = averageWeight * 0.025 * fishQuantity;
+      } else {
+        dailyFeedIntake = averageWeight * 0.015 * fishQuantity;
+      }
+
+      _showResultDialog(dailyFeedIntake);
     });
   }
 
-  double _calculateDailyFeedRatio(int quantity, double weight) {
-    // New logic for feed ratio calculation
-    // grams of feed per day = (number of fish * 85 g per fish) * 0.04
-    return (quantity * weight) * 0.04;
+  void _showResultDialog(double dailyFeedIntake) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Daily Feed Intake'),
+          content: Text(
+            'The total daily feed intake is ${dailyFeedIntake.toStringAsFixed(2)}g.\n\n'
+            'NOTE: Fingerlings are fed between 2 and 5 percent of their body weight per day, divided into two or more feedings, '
+            'while broodfish are fed 1 to 2 percent of their weight per day.',
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
-  String _getFeedSize(double weight) {
-    // Example logic for determining feed size
-    if (weight < 50) {
-      return '0.5 mm';
-    } else if (weight < 100) {
-      return '1 mm';
-    } else if (weight < 200) {
-      return '1.5 mm';
-    } else {
-      return '2 mm';
-    }
+  void _clearFields() {
+    setState(() {
+      _averageWeightController.clear();
+      _fishQuantityController.clear();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    double _dailyFeedRatioKg =
-        _dailyFeedRatio / 1000; // Convert grams to kilograms
-
     return Scaffold(
       appBar: AppBar(
-        title: Text('Daily Feed Calculator'),
+        title: const Text('Daily Feed Intake'),
+        backgroundColor: Colors.blue,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                controller: _quantityController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Fish Quantity'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter fish quantity';
-                  }
-                  if (int.tryParse(value) == null) {
-                    return 'Please enter a valid number';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: _weightController,
-                keyboardType: TextInputType.number,
-                decoration:
-                    InputDecoration(labelText: 'Average Weight (grams)'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter average weight';
-                  }
-                  if (double.tryParse(value) == null) {
-                    return 'Please enter a valid number';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton(
-                    onPressed: _calculateFeed,
-                    child: Text('Calculate'),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              child: const Center(
+                child: Text(
+                  'Calculate the Total Daily Feed Intake for Your Fish',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
-                  ElevatedButton(
-                    onPressed: _clearFields,
-                    child: Text('Clear'),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              if (_dailyFeedRatio > 0) ...[
-                Text("Daily Feed Ratio:"),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(
-                    ' ${_dailyFeedRatio.toStringAsFixed(2)} grams',
-                    style: TextStyle(color: Colors.green),
-                  ),
-                  Text(
-                    ' ( ${_dailyFeedRatioKg.toStringAsFixed(2)} kilograms) Per Day',
-                    style: TextStyle(color: Colors.green),
-                  ),
-                  //Text("  Per day")
-                ]),
-                SizedBox(
-                  height: 20,
+                  textAlign: TextAlign.center,
                 ),
-                Text('Feed Size: $_feedSize'),
-                SizedBox(height: 20),
-                Text(
-                  'This is the daily feed requirement for your fish. The amount can be fed once or divided into multiple portions. Factors such as water quality, disease, weather, stress, and dissolved oxygen levels can influence feed consumption.',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            TextField(
+              controller: _averageWeightController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                labelText: 'Average Weight of Fish (in grams)',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            TextField(
+              controller: _fishQuantityController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                labelText: 'Quantity of Fish',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: _calculateDailyFeedIntake,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey,
+                  ),
+                  child: const Text('CALCULATE'),
+                ),
+                ElevatedButton(
+                  onPressed: _clearFields,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey,
+                  ),
+                  child: const Text('CLEAR'),
                 ),
               ],
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _quantityController.dispose();
-    _weightController.dispose();
-    super.dispose();
   }
 }

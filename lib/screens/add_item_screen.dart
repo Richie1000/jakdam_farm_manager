@@ -20,6 +20,7 @@ class AddItemScreen extends StatelessWidget {
               controller: nameController,
               decoration: InputDecoration(labelText: 'Item Name'),
             ),
+            SizedBox(height: 20,),
             TextField(
               controller: quantityController,
               decoration: InputDecoration(labelText: 'Quantity'),

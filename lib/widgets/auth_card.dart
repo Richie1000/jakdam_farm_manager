@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/password_reset_screen.dart';
 import 'package:provider/provider.dart';
 import '../screens/loading_screen.dart';
 import 'custom_toast.dart';
@@ -137,9 +138,9 @@ class _AuthCardState extends State<AuthCard>
           child: AnimatedContainer(
             duration: Duration(milliseconds: 300),
             curve: Curves.easeIn,
-            height: _authMode == AuthMode.Signup ? 400 : 300,
+            height: _authMode == AuthMode.Signup ? 400 : 320,
             constraints: BoxConstraints(
-              minHeight: _authMode == AuthMode.Signup ? 400 : 300,
+              minHeight: _authMode == AuthMode.Signup ? 420 : 320,
             ),
             width: deviceSize.width * 0.75,
             padding: EdgeInsets.all(16.0),
@@ -244,8 +245,11 @@ class _AuthCardState extends State<AuthCard>
                     SizedBox(
                       height: 20,
                     ),
+                    if (_authMode == AuthMode.Login)
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordResetScreen()));
+                      },
                       child: Text("Forgot Password"),
                     ),
                     if (_isLoading)
@@ -278,7 +282,9 @@ class _AuthCardState extends State<AuthCard>
                     if (forgotPassword)
                       ElevatedButton(
                         child: Text("Reset Password"),
-                        onPressed: () {},
+                        onPressed: () {
+                         
+                        },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
