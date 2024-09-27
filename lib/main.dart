@@ -1,6 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jakdam_farm_manager/providers/inventory_provider.dart';
+import 'package:jakdam_farm_manager/screens/login_screen.dart';
+import 'package:jakdam_farm_manager/screens/new_login_screen.dart';
+import 'package:jakdam_farm_manager/screens/onboarding_screen.dart';
+import 'package:jakdam_farm_manager/screens/welcome_back_screen.dart';
 import 'package:jakdam_farm_manager/utils/theme_data.dart';
 import 'package:provider/provider.dart';
 
@@ -27,13 +31,13 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Jakdam Farm Manager',
-        theme: buildThemeData(),
+        //theme: ThemeData.dark(),
         home: Consumer<AuthProvider>(
           builder: (context, auth, _) {
             if (auth.user != null) {
               return DashboardScreen();
             } else {
-              return AuthScreen();
+              return OnboardingScreen();
             }
           },
         ),
