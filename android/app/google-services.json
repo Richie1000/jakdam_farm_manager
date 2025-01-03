@@ -1,0 +1,154 @@
+{
+  "project_info": {
+    "project_number": "356437037363",
+    "project_id": "jakdam-farm-manager",
+    "storage_bucket": "jakdam-farm-manager.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356437037363:android:ba38ede9da9b9f98ddee46",
+        "android_client_info": {
+          "package_name": "com.example.jakdam_farm_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356437037363-e53d7taekco1afi1ndd40r0og464v069.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnS4teXiVHPxyhECgZ6ZGi9XxedQOwXHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356437037363-e53d7taekco1afi1ndd40r0og464v069.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "356437037363-h33kfn7ntfkkl5qm646uqctoqpddpbkl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jakdamFarmManager"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356437037363:android:a9da12e28f811e99ddee46",
+        "android_client_info": {
+          "package_name": "com.jakdam_farm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356437037363-e53d7taekco1afi1ndd40r0og464v069.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnS4teXiVHPxyhECgZ6ZGi9XxedQOwXHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356437037363-e53d7taekco1afi1ndd40r0og464v069.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "356437037363-h33kfn7ntfkkl5qm646uqctoqpddpbkl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jakdamFarmManager"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356437037363:android:791c9bde413928d2ddee46",
+        "android_client_info": {
+          "package_name": "com.jakdam_farm_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356437037363-e53d7taekco1afi1ndd40r0og464v069.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnS4teXiVHPxyhECgZ6ZGi9XxedQOwXHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356437037363-e53d7taekco1afi1ndd40r0og464v069.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "356437037363-h33kfn7ntfkkl5qm646uqctoqpddpbkl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jakdamFarmManager"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356437037363:android:d7b27cf87eb2c608ddee46",
+        "android_client_info": {
+          "package_name": "com.jakdam_fatm_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356437037363-e53d7taekco1afi1ndd40r0og464v069.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnS4teXiVHPxyhECgZ6ZGi9XxedQOwXHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356437037363-e53d7taekco1afi1ndd40r0og464v069.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "356437037363-h33kfn7ntfkkl5qm646uqctoqpddpbkl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jakdamFarmManager"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
