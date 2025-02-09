@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jakdam_farm_manager/screens/dashboard.dart';
 import 'package:jakdam_farm_manager/screens/register_screen.dart';
-import 'package:fluttertoast/fluttertoast.dart'; // Import the fluttertoast package
+import 'package:fluttertoast/fluttertoast.dart';
 import '../models/exception_handler.dart';
 
 class NewLoginScreen extends StatefulWidget {
@@ -17,7 +17,7 @@ class NewLoginScreen extends StatefulWidget {
 
 class _NewLoginScreenState extends State<NewLoginScreen> {
   int activeIndex = 0;
-  bool _isLoading = false; // To show loading indicator
+  bool _isLoading = false;
   String _email = '';
   String _password = '';
 
@@ -44,7 +44,6 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
     });
   }
 
-  // Function to show alert dialog with error message
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
@@ -71,8 +70,6 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
-        //backgroundColor: Colors.red,
-        //textColor: Colors.white,
         fontSize: 16.0,
       );
       return;
@@ -91,8 +88,7 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
         MaterialPageRoute(builder: (context) => DashboardScreen()),
       );
     } on FirebaseAuthException catch (e) {
-      final errorMessage = FirebaseAuthErrorHandler.getErrorMessage(
-          e.code); // Use custom error handler
+      final errorMessage = FirebaseAuthErrorHandler.getErrorMessage(e.code);
       _showErrorDialog(errorMessage);
     } catch (e) {
       _showErrorDialog('An unexpected error occurred. Please try again.');
@@ -237,7 +233,7 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
               ),
               const SizedBox(height: 30),
               _isLoading
-                  ? const CircularProgressIndicator() // Show loading indicator
+                  ? const CircularProgressIndicator()
                   : FadeInUp(
                       child: MaterialButton(
                         onPressed: _login,

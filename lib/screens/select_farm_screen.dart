@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/farm_id.dart';
 import 'farm_details_screen.dart';
+import 'select_pond_screen.dart';
 
 class SelectFarmScreen extends StatefulWidget {
   const SelectFarmScreen({super.key});
@@ -124,7 +127,7 @@ class _SelectFarmScreenState extends State<SelectFarmScreen> {
           ),
           confirmDismiss: (direction) async {
             _confirmDelete(farm['id']);
-            return false; // Prevent auto-dismiss, we handle deletion manually
+            return false;
           },
           child: Card(
             margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -133,15 +136,17 @@ class _SelectFarmScreenState extends State<SelectFarmScreen> {
               subtitle: Text(farm['location'] ?? 'No location provided'),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
+                Provider.of<FarmIDProvider>(context, listen: false).setFarmID(farm['id']);
+                print(farm['id']);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => FarmDetailsScreen(
+                    builder: (context) => SelectPondScreen(
                       farmId: farm['id'],
                       userId: _userId!,
                     ),
                   ),
-                ).then((_) => _fetchFarms());
+                );
               },
             ),
           ),

@@ -1,5 +1,14 @@
 name: jakdam_farm_manager
-description: "A new Flutter project."
+description: "Jakdam Farm Manager is a comprehensive Flutter-based app designed to simplify and streamline fish farm management. Whether you're a small-scale fish farmer or running a large aquaculture operation, this app helps you efficiently manage inventory, monitor feed usage, and track stock levels with ease.
+
+Key Features:  
+- Inventory Management – Keep track of all farm essentials, including fish stock, feed, and equipment.  
+- Stock Addition & Monitoring – Easily add new stock, update quantities, and view historical records.  
+- Feed Management – Monitor daily feed intake, check feed stock levels, and optimize feeding schedules.  
+- Pond Management – Track pond water volume, fish growth rates, and stocking density.  
+- Reports & Analytics – Gain insights into farm performance with detailed reports on stock movement and feed consumption.
+
+With Jakdam Farm Manager, you can focus on growing a productive and profitable fish farm while reducing manual tracking efforts."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

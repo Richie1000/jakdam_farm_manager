@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:animate_do/animate_do.dart'; // Import animate_do package
+import 'package:animate_do/animate_do.dart';
 
 import 'daily_feed_screen.dart';
 import 'feed_budget_screen.dart';
@@ -29,7 +29,6 @@ class FeedCalculationScreen extends StatelessWidget {
                 },
               ),
             ),
-            // Remove any SizedBox or other widgets that add extra spacing
             FadeInUp(
               child: CustomCard(
                 title: 'Total Production Feed Budget',

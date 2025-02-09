@@ -20,51 +20,37 @@ class _ProductionBudgetScreenState extends State<ProductionBudgetScreen> {
   double _totalFeedRequired = 0;
   int _totalFeedBags = 0;
   bool _showDuration = false;
-  int _duration = 6; // Default duration for Catfish
-  String _lastCalculatedUnit =
-      'Feet'; // Store the unit used in the last calculation
+  int _duration = 6;
+  String _lastCalculatedUnit = 'Feet';
 
   void _calculateBudget() {
     if (_formKey.currentState!.validate()) {
       int numberOfFishes = int.parse(_numberOfFishesController.text);
 
-      // Calculate the total pond volume based on the number of fishes
-      _waterVolume =
-          (numberOfFishes / 1000) * 12000; // Total water volume in liters
+      _waterVolume = (numberOfFishes / 1000) * 12000;
 
-      // Variables for volume in cubic units
-      double volumeInCubicFeet =
-          _waterVolume / 28.3168; // Convert volume from liters to cubic feet
-      double volumeInCubicMeters =
-          _waterVolume / 1000; // Convert volume from liters to cubic meters
+      double volumeInCubicFeet = _waterVolume / 28.3168;
+      double volumeInCubicMeters = _waterVolume / 1000;
 
       if (_selectedUnit == 'Feet') {
-        // Only recalculate if unit has changed or if it's the initial calculation
         _depth = 3; // Depth in feet
 
-        // Calculate dimensions assuming the pond is a square
-        _length = Math.sqrt(volumeInCubicFeet / _depth); // Length in feet
-        _width = _length; // Width in feet, assuming a square pond
+        _length = Math.sqrt(volumeInCubicFeet / _depth);
+        _width = _length;
       } else {
-        // Only recalculate if unit has changed or if it's the initial calculation
-        _depth = 1; // Depth in meters
+        _depth = 1;
 
-        // Calculate dimensions assuming the pond is a square
-        _length = Math.sqrt(volumeInCubicMeters / _depth); // Length in meters
-        _width = _length; // Width in meters, assuming a square pond
+        _length = Math.sqrt(volumeInCubicMeters / _depth);
+        _width = _length;
       }
 
-      // Update total feed required and feed bags
-      _totalFeedRequired = numberOfFishes.toDouble(); // Total feed in kg
-      _totalFeedBags =
-          (_totalFeedRequired / 15).ceil(); // Number of bags, 1 bag = 15 kg
+      _totalFeedRequired = numberOfFishes.toDouble();
+      _totalFeedBags = (_totalFeedRequired / 15).ceil();
 
       setState(() {
         _showDuration = true;
-        _duration = _selectedFishType == 'Catfish'
-            ? 6
-            : 7; // Update duration based on selected fish type
-        _lastCalculatedUnit = _selectedUnit; // Update the last calculated unit
+        _duration = _selectedFishType == 'Catfish' ? 6 : 7;
+        _lastCalculatedUnit = _selectedUnit;
       });
     }
   }
@@ -79,10 +65,8 @@ class _ProductionBudgetScreenState extends State<ProductionBudgetScreen> {
       _totalFeedRequired = 0;
       _totalFeedBags = 0;
       _showDuration = false;
-      _duration = _selectedFishType == 'Catfish'
-          ? 6
-          : 7; // Reset duration to default based on fish type
-      _selectedUnit = _lastCalculatedUnit; // Reset to the last calculated unit
+      _duration = _selectedFishType == 'Catfish' ? 6 : 7;
+      _selectedUnit = _lastCalculatedUnit;
     });
   }
 
@@ -138,9 +122,7 @@ class _ProductionBudgetScreenState extends State<ProductionBudgetScreen> {
                 onChanged: (value) {
                   setState(() {
                     _selectedFishType = value!;
-                    _duration = value == 'Catfish'
-                        ? 6
-                        : 7; // Update duration based on selected fish type
+                    _duration = value == 'Catfish' ? 6 : 7;
                   });
                 },
               ),
@@ -159,8 +141,7 @@ class _ProductionBudgetScreenState extends State<ProductionBudgetScreen> {
                       onPressed: _clearFields,
                       child: Text('Clear'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors
-                            .red, // Change the color to differentiate the button
+                        backgroundColor: Colors.red,
                       ),
                     ),
                   ),

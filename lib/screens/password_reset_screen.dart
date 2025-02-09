@@ -23,7 +23,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
           content: Text('Password reset email sent! Check your inbox.'),
         ),
       );
-      _emailController.clear(); // Clear the email field after sending the email
+      _emailController.clear();
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

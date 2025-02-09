@@ -17,7 +17,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String _password = '';
   String _confirmPassword = '';
   String _username = '';
-  bool _isLoading = false; // Show loading indicator
+  bool _isLoading = false;
 
   final List<String> _images = [
     'assets/images/typography-illustration-featuring-a-fish-farm-full-of-freshwater-fish-JJA207.jpg',
@@ -53,11 +53,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
 
     try {
-      // Register user
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: _email, password: _password);
 
-      // Save user info to Firestore
       await FirebaseFirestore.instance
           .collection('users')
           .doc(userCredential.user?.uid)
@@ -66,7 +64,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         'username': _username,
       });
 
-      // Navigate to the login screen or dashboard
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => DashboardScreen()),
       );

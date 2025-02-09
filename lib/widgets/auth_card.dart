@@ -3,7 +3,7 @@ import '../screens/password_reset_screen.dart';
 import 'package:provider/provider.dart';
 import '../screens/loading_screen.dart';
 import 'custom_toast.dart';
-// import '../functions/login.dart';
+
 import '../providers/auth.dart';
 
 enum AuthMode { Signup, Login }
@@ -95,8 +95,6 @@ class _AuthCardState extends State<AuthCard>
       _isLoading = true;
     });
 
-    // Show dialog only when _isLoading is true
-
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     try {
@@ -112,16 +110,12 @@ class _AuthCardState extends State<AuthCard>
           _authData['name']!,
         );
       }
-
-      // Authentication successful, handle navigation or UI changes here
     } catch (error) {
-      // Handle authentication errors (e.g., display error message)
     } finally {
       setState(() {
         _isLoading = false;
       });
     }
-    //Navigator.of(context).pop();
   }
 
   @override
@@ -292,16 +286,13 @@ class _AuthCardState extends State<AuthCard>
                           backgroundColor: Theme.of(context).primaryColor,
                           padding: EdgeInsets.symmetric(
                               horizontal: 30.0, vertical: 8.0),
-                          textStyle: TextStyle(
-                              //color: Theme.of(context).primaryTextTheme.button.color,
-                              ),
+                          textStyle: TextStyle(),
                         ),
                       ),
                     TextButton(
                       onPressed: _switchAuthMode,
                       child: Text(
                         '${_authMode == AuthMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD',
-                        //style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ],

@@ -17,15 +17,9 @@ class FarmDetailsScreen extends StatefulWidget {
 class _FarmDetailsScreenState extends State<FarmDetailsScreen> {
   int _currentIndex = 0;
 
-  final List<Widget Function(String, String)> _screens = [
-    (userId, farmId) => FeedRecordScreen(userId: userId, farmId: farmId),
-    (userId, farmId) => ExpenseTrackingScreen(userId: userId, farmId: farmId),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_currentIndex](widget.userId, widget.farmId),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),

@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="jakdam_farm_manager"
+        android:label="@string/app_name"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -42,4 +42,6 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+
+
 </manifest>

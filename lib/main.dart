@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:jakdam_farm_manager/providers/farm_id.dart';
 import 'package:jakdam_farm_manager/providers/inventory_provider.dart';
 import 'package:jakdam_farm_manager/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
@@ -25,9 +26,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthProvider()),
-        ChangeNotifierProvider(create: (context) => InventoryProvider())
+        ChangeNotifierProvider(create: (context) => InventoryProvider()),
+        ChangeNotifierProvider(create: (context) => FarmIDProvider())
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Jakdam Farm Manager',
         //theme: ThemeData.dark(),
         home: Consumer<AuthProvider>(

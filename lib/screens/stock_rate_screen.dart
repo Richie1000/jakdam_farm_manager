@@ -15,7 +15,7 @@ class _StockRateScreenState extends State<StockRateScreen> {
   final TextEditingController _diameterController = TextEditingController();
 
   double _convertToFeet(double value) {
-    return value * 3.28084; // Conversion factor from meters to feet
+    return value * 3.28084;
   }
 
   void _calculateWaterVolume() {
@@ -24,20 +24,16 @@ class _StockRateScreenState extends State<StockRateScreen> {
       double width = double.parse(_widthController.text);
       double depth = double.parse(_depthController.text);
 
-      // Convert values to feet if 'Meters' is selected
       if (_selectedUnit == 'Meters') {
         length = _convertToFeet(length);
         width = _convertToFeet(width);
         depth = _convertToFeet(depth);
       }
 
-      // Calculate water volume in cubic feet
       double volume = length * width * depth;
 
-      // Convert cubic feet to liters
       double volumeInLiters = volume * 28.32;
 
-      // Final calculation and rounding off
       int finalResult = (volumeInLiters / 13.15).round();
 
       showDialog(
@@ -67,19 +63,15 @@ class _StockRateScreenState extends State<StockRateScreen> {
       double diameter = double.parse(_diameterController.text);
       double depth = double.parse(_depthController.text);
 
-      // Convert values to feet if 'Meters' is selected
       if (_selectedUnit == 'Meters') {
         diameter = _convertToFeet(diameter);
         depth = _convertToFeet(depth);
       }
 
-      // Calculate water volume for circular pond
       double volume = 3.14159 * ((diameter * 0.5) * (diameter * 0.5)) * depth;
 
-      // Convert cubic feet to liters
       double volumeInLiters = volume * 28.32;
 
-      // Final calculation and rounding off
       int finalResult = (volumeInLiters / 13.15).round();
 
       showDialog(

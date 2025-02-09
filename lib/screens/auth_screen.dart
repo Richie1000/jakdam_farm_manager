@@ -9,7 +9,6 @@ class AuthScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          // Background Image
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -68,7 +67,6 @@ class AuthCard extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            // Full Name Field
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'Full Name',
@@ -92,7 +90,6 @@ class AuthCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            // Password Field
             TextFormField(
               obscureText: true,
               decoration: InputDecoration(
@@ -105,7 +102,6 @@ class AuthCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            // Login Button
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
@@ -120,26 +116,12 @@ class AuthCard extends StatelessWidget {
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),
-            // Optional: Social Media Sign-in
             SizedBox(height: 10),
             Text('Or continue with'),
             SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // IconButton(
-                //   icon: Image.asset('assets/icons/google_icon.png'), // Add your Google icon
-                //   onPressed: () {},
-                // ),
-                // IconButton(
-                //   icon: Image.asset('assets/icons/facebook_icon.png'), // Add your Facebook icon
-                //   onPressed: () {},
-                // ),
-                // IconButton(
-                //   icon: Image.asset('assets/icons/apple_icon.png'), // Add your Apple icon
-                //   onPressed: () {},
-                // ),
-              ],
+              children: [],
             ),
           ],
         ),

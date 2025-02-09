@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDnS4teXiVHPxyhECgZ6ZGi9XxedQOwXHI',
-    appId: '1:356437037363:android:791c9bde413928d2ddee46',
-    messagingSenderId: '356437037363',
-    projectId: 'jakdam-farm-manager',
-    storageBucket: 'jakdam-farm-manager.firebasestorage.app',
+    apiKey: 'AIzaSyCVzzIukMAY0MRCPMTjwcCNadI173wKXYs',
+    appId: '1:530942116436:android:e8fb072257930f24bba3c1',
+    messagingSenderId: '530942116436',
+    projectId: 'jakdam-farm-manager-2670c',
+    storageBucket: 'jakdam-farm-manager-2670c.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBO4ae7mQ5lrT5YxhC-3KBzQ3k-qPm9iG8',
-    appId: '1:356437037363:ios:c899a2dd67116580ddee46',
-    messagingSenderId: '356437037363',
-    projectId: 'jakdam-farm-manager',
-    storageBucket: 'jakdam-farm-manager.firebasestorage.app',
-    iosClientId: '356437037363-h33kfn7ntfkkl5qm646uqctoqpddpbkl.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCh54Z4c7TQBCb1cP4M3ZTCtklsVnx68yM',
+    appId: '1:530942116436:ios:35c513805ce310d9bba3c1',
+    messagingSenderId: '530942116436',
+    projectId: 'jakdam-farm-manager-2670c',
+    storageBucket: 'jakdam-farm-manager-2670c.firebasestorage.app',
     iosBundleId: 'com.example.jakdamFarmManager',
   );
+
 }

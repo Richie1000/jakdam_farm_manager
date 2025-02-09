@@ -51,7 +51,6 @@ class _AutoTreatmentDosageScreenState extends State<AutoTreatmentDosageScreen> {
         backgroundColor: Colors.white,
       ),
       drawer: Drawer(
-        // Add drawer content here if needed
         child: ListView(
           padding: EdgeInsets.zero,
           children: [

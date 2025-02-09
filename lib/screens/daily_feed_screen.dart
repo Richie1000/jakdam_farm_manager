@@ -65,7 +65,6 @@ class _DailyFeedScreenState extends State<DailyFeedScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Daily Feed Intake'),
-        //backgroundColor: Colors.blue,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -114,16 +113,10 @@ class _DailyFeedScreenState extends State<DailyFeedScreen> {
               children: [
                 ElevatedButton(
                   onPressed: _calculateDailyFeedIntake,
-                  // style: ElevatedButton.styleFrom(
-                  //   backgroundColor: Colors.grey,
-                  // ),
                   child: const Text('CALCULATE'),
                 ),
                 ElevatedButton(
                   onPressed: _clearFields,
-                  // style: ElevatedButton.styleFrom(
-                  //   backgroundColor: Colors.grey,
-                  // ),
                   child: const Text('CLEAR'),
                 ),
               ],

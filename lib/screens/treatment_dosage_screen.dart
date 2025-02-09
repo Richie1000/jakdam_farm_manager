@@ -17,7 +17,6 @@ class _TreatmentDosageScreenState extends State<TreatmentDosageScreen> {
   final TextEditingController _widthController = TextEditingController();
   final TextEditingController _doseController = TextEditingController();
 
-  // Function to calculate volume based on selected unit and pond shape
   double _calculateVolume() {
     double depth = double.parse(_depthController.text);
     double volume;
@@ -25,18 +24,17 @@ class _TreatmentDosageScreenState extends State<TreatmentDosageScreen> {
     if (_selectedPondShape == 'Circular') {
       double diameter = double.parse(_diameterController.text);
       double radius = diameter / 2;
-      volume = 3.14159 * radius * radius * depth; // Volume of a cylinder
+      volume = 3.14159 * radius * radius * depth;
     } else {
       double length = double.parse(_lengthController.text);
       double width = double.parse(_widthController.text);
-      volume = length * width * depth; // Volume of a rectangular prism
+      volume = length * width * depth;
     }
 
-    // Convert volume based on selected unit
     if (_selectedUnit == 'Feet') {
-      volume *= 28.317; // Convert from cubic feet to liters
+      volume *= 28.317;
     } else if (_selectedUnit == 'Meters') {
-      volume *= 1000; // Convert from cubic meters to liters
+      volume *= 1000;
     }
 
     return volume;
@@ -51,8 +49,7 @@ class _TreatmentDosageScreenState extends State<TreatmentDosageScreen> {
       if (_selectedDosageUnit == 'Dose per Liter') {
         totalDosage = volume * dose;
       } else {
-        // Convert dosage from ppm to total dose
-        totalDosage = (dose * volume) / 1000; // Convert ppm to grams/liters
+        totalDosage = (dose * volume) / 1000;
       }
 
       showDialog(

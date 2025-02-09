@@ -22,17 +22,6 @@ class PondCalculationsScreen extends StatelessWidget {
                 );
               },
             ),
-
-            // PondCalculationCard(
-            //   title: 'Auto Treatment Dosage',
-            //   onTap: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //           builder: (context) => AutoTreatmentDosageScreen()),
-            //     );
-            //   },
-            // ),
           ],
         ),
       ),

@@ -12,26 +12,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  // Onboarding data now includes Lottie asset file paths
   final List<Map<String, dynamic>> _onboardingData = [
     {
       'title': 'Manage Your Fish Farm',
       'description':
           'Keep track of fish health, pond conditions, and stock levels in one place for a healthy produce.',
-      'lottieFile': 'assets/animations/ab.json', // Lottie file for fish farm
+      'lottieFile': 'assets/animations/ab.json',
     },
     {
       'title': 'Monitor Water Quality',
       'description':
           'Ensure optimal water conditions with our easy-to-use monitoring tools.',
-      'lottieFile':
-          'assets/animations/ac.json', // Lottie file for water quality
+      'lottieFile': 'assets/animations/ac.json',
     },
     {
       'title': 'Enhance Customer Reach',
       'description': 'Reach More Customers than ever before!',
-      'lottieFile':
-          'assets/animations/selling.json', // Lottie file for productivity
+      'lottieFile': 'assets/animations/selling.json',
     },
   ];
 
@@ -51,8 +48,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   void _navigateToLogin(BuildContext context) {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-          builder: (ctx) => NewLoginScreen()), // Replace with login screen
+      MaterialPageRoute(builder: (ctx) => NewLoginScreen()),
     );
   }
 
@@ -77,7 +73,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               );
             },
           ),
-          // Bottom navigation dots
           Positioned(
             bottom: 40,
             left: 0,
@@ -98,7 +93,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               }),
             ),
           ),
-          // Skip or Get Started button
           Positioned(
             bottom: 40,
             right: 20,
@@ -146,20 +140,17 @@ class OnboardingPage extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          // Upper part with different background color
           Container(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height *
-                0.4, // Takes 40% of the screen height
-            color: Colors.blueGrey[50], // Different background color
+            height: MediaQuery.of(context).size.height * 0.4,
+            color: Colors.blueGrey[50],
             child: Center(
               child: Container(
                 width: 250,
                 height: 250,
                 child: Padding(
-                  padding: const EdgeInsets.all(
-                      8.0), // Optional padding inside the border
-                  child: Lottie.asset(lottieFile), // Lottie animation
+                  padding: const EdgeInsets.all(8.0),
+                  child: Lottie.asset(lottieFile),
                 ),
               ),
             ),

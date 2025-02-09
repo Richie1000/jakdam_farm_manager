@@ -39,7 +39,6 @@ class _CreateFarmScreenState extends State<CreateFarmScreen> {
         'feedTracking': [],
       };
 
-      // Save farm under the structure: farms -> userId -> farmId -> farmData
       await _firestore
           .collection('farms')
           .doc(userId)

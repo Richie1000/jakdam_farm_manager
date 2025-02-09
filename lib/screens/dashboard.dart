@@ -28,11 +28,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Future<void> _fetchUsernameAndInitials() async {
-    // Simulated user fetching
     setState(() {
       _username = "User";
       _initials = "US";
     });
+  }
+
+  Future<void> openWhatsAppChat({String? message}) async {
+    final encodedMessage = Uri.encodeComponent(message ?? '');
+    final whatsappUrl = 'https://wa.me/+233248570441?text=$encodedMessage';
+
+    if (await canLaunchUrl(Uri.parse(whatsappUrl))) {
+      await launchUrl(Uri.parse(whatsappUrl),
+          mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch WhatsApp chat';
+    }
   }
 
   @override
@@ -70,6 +81,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
         }
       },
       () async {
+        openWhatsAppChat();
+      },
+      () async {
         print("Logging out...");
         final authProvider =
             Provider.of<customAuth.AuthProvider>(context, listen: false);
@@ -87,7 +101,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header Container
             Container(
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
@@ -136,7 +149,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ],
               ),
             ),
-            // Dashboard Items Container
             Container(
               color: Theme.of(context).primaryColor,
               child: Container(
@@ -161,7 +173,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         mainAxisSpacing: 20,
                         childAspectRatio: aspectRatio,
                       ),
-                      itemCount: 6, // Adjust based on actual items
+                      itemCount: 7,
                       itemBuilder: (context, index) {
                         return itemDashboard(
                           titles[index],
@@ -182,13 +194,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // Dashboard item content
   final List<String> titles = [
     'Pond Calculations',
     'Feed Calculations',
     'Inventory',
     'Feed Formulae',
     'Request Training',
+    'Contact us',
     'Logout'
   ];
 
@@ -198,6 +210,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     'assets/animations/stock.json',
     'assets/animations/cooking.json',
     'assets/animations/training.json',
+    'assets/animations/contact_us.json',
     'assets/animations/logout.json',
   ];
 

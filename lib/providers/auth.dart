@@ -5,9 +5,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class AuthProvider extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? _user; // Change to nullable
+  User? _user;
 
-  User? get user => _user; // Change to nullable
+  User? get user => _user;
 
   AuthProvider() {
     _auth.authStateChanges().listen((User? user) {
@@ -24,7 +24,6 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return _user;
     } catch (error) {
-      //print("this is the error" + error.toString());
       String modifiedErrorMessage =
           error.toString().replaceAll("firebase_auth", "");
       Fluttertoast.showToast(
@@ -44,7 +43,7 @@ class AuthProvider extends ChangeNotifier {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       _user = result.user;
-      // Add user details to Firestore collection
+
       await FirebaseFirestore.instance.collection('users').doc(_user!.uid).set({
         'email': email,
         'username': fullName,

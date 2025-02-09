@@ -23,7 +23,7 @@ class InventoryProvider with ChangeNotifier {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       userId = user.uid;
-      _fetchInventoryItems(); // Fetch inventory items once user ID is set
+      _fetchInventoryItems();
     }
   }
 
@@ -61,10 +61,8 @@ class InventoryProvider with ChangeNotifier {
     if (dateAdded is Timestamp) {
       return dateAdded.toDate();
     } else if (dateAdded is String) {
-      // Assuming the string is in a recognizable date format
       return DateTime.tryParse(dateAdded) ?? DateTime.now();
     } else {
-      // Fallback to current date if type is unrecognized
       print('Warning: Unrecognized date type. Defaulting to current date.');
       return DateTime.now();
     }
@@ -77,7 +75,7 @@ class InventoryProvider with ChangeNotifier {
         .doc(userId)
         .collection('items')
         .add(item.toMap());
-    _fetchInventoryItems(); // Refresh items after adding
+    _fetchInventoryItems();
   }
 
   Future<void> updateItemQuantity(String id, int quantity) async {
@@ -90,7 +88,7 @@ class InventoryProvider with ChangeNotifier {
         .update({
       'quantity': quantity,
     });
-    _fetchInventoryItems(); // Refresh items after updating
+    _fetchInventoryItems();
   }
 
   Future<void> deleteItem(String id) async {
@@ -101,7 +99,7 @@ class InventoryProvider with ChangeNotifier {
         .collection('items')
         .doc(id)
         .delete();
-    _fetchInventoryItems(); // Refresh items after deleting
+    _fetchInventoryItems();
   }
 
   Future<void> updateItem(InventoryItem updatedItem) async {

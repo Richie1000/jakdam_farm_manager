@@ -98,7 +98,6 @@ class _FeedBudgetScreenState extends State<FeedBudgetScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Feed Budget'),
-        //backgroundColor: Colors.blue,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -173,72 +172,82 @@ class _FeedBudgetScreenState extends State<FeedBudgetScreen> {
             const SizedBox(height: 16.0),
             Table(
               border: TableBorder.all(color: Colors.grey),
-              // columnWidths: const {
-              //   0: FlexColumnWidth(2),
-              //   1: FlexColumnWidth(2),
-              //   2: FlexColumnWidth(2),
-              //   3: FlexColumnWidth(1.5),
-              //   4: FlexColumnWidth(2),
-              // },
+              columnWidths: const {
+                0: FlexColumnWidth(1.5),
+                1: FlexColumnWidth(2),
+                2: FlexColumnWidth(2),
+                3: FlexColumnWidth(2),
+                4: FlexColumnWidth(2),
+              },
               children: [
                 TableRow(
                   children: [
                     TableCell(
                       child: Container(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 6.0, horizontal: 4.0),
                         color: Colors.grey[300],
                         child: const Center(
                           child: Text(
                             'FEED SIZE',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14),
                           ),
                         ),
                       ),
                     ),
                     TableCell(
                       child: Container(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 6.0, horizontal: 4.0),
                         color: Colors.grey[300],
                         child: const Center(
                           child: Text(
                             'QUANTITY IN KILOGRAMS',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14),
                           ),
                         ),
                       ),
                     ),
                     TableCell(
                       child: Container(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 6.0, horizontal: 4.0),
                         color: Colors.grey[300],
                         child: const Center(
                           child: Text(
                             'QUANTITY IN BAGS',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14),
                           ),
                         ),
                       ),
                     ),
                     TableCell(
                       child: Container(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 6.0, horizontal: 4.0),
                         color: Colors.grey[300],
                         child: const Center(
                           child: Text(
                             'UNIT PRICE (GHC)',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14),
                           ),
                         ),
                       ),
                     ),
                     TableCell(
                       child: Container(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 6.0, horizontal: 4.0),
                         color: Colors.grey[300],
                         child: const Center(
                           child: Text(
                             'TOTAL COST (GHC)',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14),
                           ),
                         ),
                       ),
@@ -257,58 +266,67 @@ class _FeedBudgetScreenState extends State<FeedBudgetScreen> {
                     children: [
                       TableCell(
                         child: Container(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6.0, horizontal: 4.0),
                           color: Colors.grey[200],
                           child: Center(
                             child: Text(
                               size,
-                              style: const TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ),
                         ),
                       ),
                       TableCell(
                         child: Container(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6.0, horizontal: 4.0),
                           color: Colors.grey[200],
                           child: Center(
                             child: Text(
                               _quantitiesInKg[size]!.toStringAsFixed(2),
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ),
                         ),
                       ),
                       TableCell(
                         child: Container(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6.0, horizontal: 4.0),
                           color: Colors.grey[200],
                           child: Center(
                             child: Text(
                               _quantitiesInBags[size]!.toStringAsFixed(2),
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ),
                         ),
                       ),
                       TableCell(
                         child: Container(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6.0, horizontal: 4.0),
                           color: Colors.grey[200],
                           child: Center(
                             child: Text(
                               size != 'TOTAL'
                                   ? _unitPrices[size]!.toStringAsFixed(0)
                                   : '',
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ),
                         ),
                       ),
                       TableCell(
                         child: Container(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6.0, horizontal: 4.0),
                           color: Colors.grey[200],
                           child: Center(
                             child: Text(
                               _totalCosts[size]!.toStringAsFixed(2),
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ),
                         ),
